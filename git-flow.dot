@@ -13,6 +13,10 @@ strict digraph git {
     }
     subgraph {
         rank=sink;
+        release [label="release", group="release"];
+    }
+    subgraph {
+        rank=sink;
         develop [label="develop", group="develop"];
     }
     subgraph {
@@ -37,57 +41,65 @@ strict digraph git {
     // branches
     subgraph {
         node  [group="master", fillcolor="#27E4F9"];
-        mc1; mc2; mc3; mc4;
+        mst1; mst2; mst3; mst4;
         subgraph {
             rank=source;
-            ms [label="", width=0, height=0, penwidth=0];
+            init [label="", width=0, height=0, penwidth=0];
         }
-        mc1 -> mc2 -> mc3 -> mc4;
-        ms -> mc1 [color="#b0b0b0", style=dashed, arrowhead=none ];
-        mc4 -> master [color="#b0b0b0", style=dashed, arrowhead=none ];
+        init -> mst1 [color="#b0b0b0", style=dashed, arrowhead=none ];
+        mst1 -> mst2 -> mst3 -> mst4;
+        mst4 -> master [color="#b0b0b0", style=dashed, arrowhead=none ];
+    }
+
+    subgraph {
+        node  [group="release", fillcolor="#52C322"];
+        rc1; rc2; rc3;
+        rc1 -> rc2 -> rc3;
+        rc3 -> release [color="#b0b0b0", style=dashed, arrowhead=none];
     }
 
     subgraph {
         node  [group="develop", fillcolor="#FFE333"];
-        dc1; dc2; dc3; dc4; dc5; dc6; dc7; dc8; dc9; dc10;
-        dc1 -> dc2 -> dc3 -> dc4 -> dc5 -> dc6 -> dc7 -> dc8 -> dc9 -> dc10;
-        mc1 -> dc1;
-        dc4 -> mc2;
-        dc6 -> mc3;
-        dc10 -> develop [color="#b0b0b0", style=dashed, arrowhead=none ];
+        dev1; dev2; dev3; dev4; dev5; dev6; dev7; dev8; dev9; dev10;
+        dev1 -> dev2 -> dev3 -> dev4 -> dev5 -> dev6 -> dev7 -> dev8 -> dev9 -> dev10;
+        dev10 -> develop [color="#b0b0b0", style=dashed, arrowhead=none ];
     }
 
     subgraph {
-        node  [group="featA", fillcolor="#52C322"];
+        node  [group="featA", fillcolor="#FB3DB5"];
         fa1; fa2; fa3; fa4;
-        fa4 -> featA [color="#b0b0b0", style=dashed, arrowhead=none];
         fa1 -> fa2 -> fa3 -> fa4;
-        dc1 -> fa1;
-        fa3 -> dc2;
-        fa4 -> dc3;
+        fa4 -> featA [color="#b0b0b0", style=dashed, arrowhead=none];
+
     }
 
     subgraph {
         node  [group="featB", fillcolor="#FB3DB5"];
         fb1; fb2; fb3; fb4;
-        fb4 -> featB [color="#b0b0b0", style=dashed, arrowhead=none];
         fb1 -> fb2 -> fb3 -> fb4;
-        dc4 -> fb1;
-        fb3 -> dc6;
+        fb4 -> featB [color="#b0b0b0", style=dashed, arrowhead=none];
     }
+
+    // merge
+    mst1 -> dev1;
+    dev1 -> fa1;
+    dev4 -> fb1;
+    fa3 -> dev2;
+    fa4 -> dev3;
+    fb3 -> dev6;
 
     // tags connections
     edge [color="#b0b0b0", style=dotted, len=0.3, arrowhead=none, penwidth=1];
     subgraph  {
         rank="same";
-        tag1 -> mc1;
+        tag1 -> mst1;
     }
     subgraph  {
         rank="same";
-        tag2 -> mc2;
+        tag2 -> mst2;
     }
     subgraph  {
         rank="same";
-        tag3 -> mc3;
+        tag3 -> mst3;
     }
 }
