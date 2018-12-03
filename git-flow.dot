@@ -68,7 +68,7 @@ strict digraph git {
     }
 
     subgraph {
-        node  [group="featB", fillcolor="#52C322"];
+        node  [group="featB", fillcolor="#FB3DB5"];
         fb1; fb2; fb3; fb4;
         fb4 -> featB [color="#b0b0b0", style=dashed, arrowhead=none];
         fb1 -> fb2 -> fb3 -> fb4;
