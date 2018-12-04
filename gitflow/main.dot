@@ -2,7 +2,7 @@ strict digraph git {
     rankdir="BT"; nodesep=0.5; ranksep=0.25; splines=line; forcelabels=false;
 
     // general
-    node [style=filled, color="black", fontcolor="black", font="Consolas", fontsize="12pt" ];
+    node [style=filled, color="black", fontcolor="black", font="Consolas", fontsize="10pt" ];
     edge [arrowhead=vee, color="black", penwidth=2];
 
     // branch
@@ -13,29 +13,33 @@ strict digraph git {
     }
     subgraph {
         rank=sink;
-        release [label="release", group="release"];
+        rc1 [label="release(v1.2.3-rc1)", group="release"];
     }
+    // subgraph {
+    //     rank=sink;
+    //     rc2 [label="v1.0.3-rc", group="releaseB"];
+    // }
+
     subgraph {
         rank=sink;
         develop [label="develop", group="develop"];
     }
+
     subgraph {
         rank=sink;
-        featA [label="featA", group="featA"];
+        featA [label="featA(wang/feat1)", group="featA"];
     }
     subgraph {
         rank=sink;
-        featB [label="featB", group="featB"];
+        featB [label="featB(liu/feat2)", group="featB"];
     }
 
-    // tags
     node [shape=cds, fixedsize=false, fillcolor="#C6C6C6", penwidth=1, margin="0.11,0.055"]
-    tag1 [label="0.1"]
-    tag2 [label="0.2"]
-    tag3 [label="1.0"]
-
+    tag1 [label="v0.1.1"]
+    tag2 [label="v1.2.3"]
 
     // graph
+
     node [width=0.2, height=0.2, fixedsize=true, label="", margin="0.11,0.055", shape=circle, penwidth=2, fillcolor="#FF0000"]
 
     // branches
@@ -53,10 +57,17 @@ strict digraph git {
 
     subgraph {
         node  [group="release", fillcolor="#52C322"];
-        rc1; rc2; rc3;
-        rc1 -> rc2 -> rc3;
-        rc3 -> release [color="#b0b0b0", style=dashed, arrowhead=none];
+        rca1; rca2; rca3;
+        rca1 -> rca2 -> rca3;
+        rca3 -> rc1 [color="#b0b0b0", style=dashed, arrowhead=none];
     }
+
+    // subgraph {
+    //     node  [group="releaseB", fillcolor="#52C322"];
+    //     rcb1; rcb2;
+    //     rcb1 -> rcb2;
+    //     rcb2 -> rc2 [color="#b0b0b0", style=dashed, arrowhead=none];
+    // }
 
     subgraph {
         node  [group="develop", fillcolor="#FFE333"];
@@ -80,13 +91,26 @@ strict digraph git {
         fb4 -> featB [color="#b0b0b0", style=dashed, arrowhead=none];
     }
 
+
+
     // merge
     mst1 -> dev1;
+
+    dev2 -> rca1;
+    rca3 -> mst2;
+    rca3 -> dev5;
+
+    // dev7 -> rcb1;
+    // rcb2 -> dev8;
+    // rcb2 -> mst3;
+
     dev1 -> fa1;
     dev4 -> fb1;
     fa3 -> dev2;
     fa4 -> dev3;
     fb3 -> dev6;
+
+
 
     // tags connections
     edge [color="#b0b0b0", style=dotted, len=0.3, arrowhead=none, penwidth=1];
@@ -98,8 +122,5 @@ strict digraph git {
         rank="same";
         tag2 -> mst2;
     }
-    subgraph  {
-        rank="same";
-        tag3 -> mst3;
-    }
+
 }
