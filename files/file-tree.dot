@@ -1,0 +1,20 @@
+strict graph {
+
+    node [fontname="Consolas Bold"];
+
+    "/" [shape=folder label="/"];
+    "/boot" [shape=folder];
+    "/usr" [shape=folder];
+    "/home" [shape=folder];
+    "/var" [shape=folder];
+    "/frank" [shape=folder];
+    "/peter" [shape=folder];
+
+    "/" -- "/boot";
+    "/" -- "/usr";
+    "/" -- "/home";
+    "/" -- "/var";
+    "/home" -- "/frank";
+    "/home" -- "/peter";
+
+}
