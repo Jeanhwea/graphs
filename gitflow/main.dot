@@ -1,8 +1,8 @@
 strict digraph git {
-    rankdir="BT"; nodesep=0.5; ranksep=0.25; splines=line; forcelabels=false;
+    rankdir="LR"; nodesep=0.5; ranksep=0.25; splines=line; forcelabels=false;
 
     // general
-    node [style=filled, color="black", fontcolor="black", font="Consolas", fontsize="10pt" ];
+    node [style=filled, color="black", fontcolor="black", font="Source Code Pro", fontsize="16pt" ];
     edge [arrowhead=vee, color="black", penwidth=2];
 
     // branch
@@ -13,7 +13,7 @@ strict digraph git {
     }
     subgraph {
         rank=sink;
-        rc1 [label="release(v1.2.3-rc1)", group="release"];
+        rc1 [label="release (v1.2.3-rc1)", group="release"];
     }
     // subgraph {
     //     rank=sink;
@@ -27,11 +27,11 @@ strict digraph git {
 
     subgraph {
         rank=sink;
-        featA [label="featA(wang/feat1)", group="featA"];
+        featA [label="featA (wang/feat1)", group="featA"];
     }
     subgraph {
         rank=sink;
-        featB [label="featB(liu/feat2)", group="featB"];
+        featB [label="featB (liu/feat2)", group="featB"];
     }
 
     node [shape=cds, fixedsize=false, fillcolor="#C6C6C6", penwidth=1, margin="0.11,0.055"]
