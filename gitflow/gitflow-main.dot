@@ -91,19 +91,19 @@ strict digraph git {
   // merges
   mst1 -> dev1;
 
-  dev2 -> rca1;
+  dev5 -> rca1;
   rca3 -> mst2;
-  rca3 -> dev5;
+  rca3 -> dev8;
 
   // dev7 -> rcb1;
   // rcb2 -> dev8;
   // rcb2 -> mst3;
 
   dev1 -> fa1;
-  dev4 -> fb1;
+  dev6 -> fb1;
   fa3 -> dev2;
   fa4 -> dev3;
-  fb3 -> dev6;
+  fb3 -> dev9;
 
   // tags connections
   edge [color="#b0b0b0", style=dotted, len=0.3, arrowhead=none, penwidth=1];
