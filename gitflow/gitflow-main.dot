@@ -107,11 +107,11 @@ strict digraph git {
 
   // tags connections
   edge [color="#b0b0b0", style=dotted, len=0.3, arrowhead=none, penwidth=1];
-  subgraph  {
+  subgraph {
     rank="same";
     tag1 -> mst1;
   }
-  subgraph  {
+  subgraph {
     rank="same";
     tag2 -> mst2;
   }
